@@ -1,47 +1,150 @@
-// GIVEN I am taking a code quiz
-// WHEN I click the start button
-// THEN a timer starts and I am presented with a question
-    //The fact that there is a start button means I have to have an eventListener
-    //I can put the questions in an array
-        //I can also use a for loop to obtain the next question 
-// WHEN I answer a question
-// THEN I am presented with another question
-    //The for loop needs to continue to the next string 
-// WHEN I answer a question incorrectly
-    //I need to have an if else statement to subtract time from the clock 
-// THEN time is subtracted from the clock
-    //I need to have a function with a set amount of time to subratract when the statement is false
-// WHEN all questions are answered or the timer reaches 0
-// THEN the game is over
-    //When the loop ends, alert the user the game is over 
-    //Also a function that when timer hits 0, it ends the game
-// WHEN the game is over
-// THEN I can save my initials and my score
-    //I need to have a function to send scores to the local storage.
+//create questions array
+var quizQuestions = [
+    {
+        question: "Question 1: What is a self-closing tag?",
+        answer: "A tag with no closing tag",
+        choices: ["A tag with no closing tag", "An empty tag", "An array of strings", "An automated tag"],
+    },
+    {
+        question: "Question 2: What does CSS stand for?",
+        answer: "Cascading Style Sheets",
+        choices: ["Cascade Style Ships", "Cascading Style Sheets", "Coconut Syrup Sucks", "Costco Size Sheets"],
+    },
+    {
+        question: "Question 3: What is a directory?",
+        choices: ["Directions to a computer store", "A location for storing files on a computer", "Being direct with your boss?", "Somebody who doesn't take directions"],
+        answer: "A location for storing files on a computer",
+    },
+    {
+        question: "Question 4: What is HTML?",
+        choices: ["Hot Tamales Made Late", "Hot Tuesday Morning Laughs", "Hypertext Markup Language", "Heat Torments My Life"],
+        answer: "Hypertext Markup Language",
+    },
+    {
+        question: "Question 5: What is a repository?",
+        answer: "A central location to store data",
+        choices: ["A central location to store data", "Used in medical settings", "A place to re-deposit money", "A place where computers are stored"],
+    }
+]
 
-//Array of questions    
-var questions = ["Question 1: What is a self-closing tag?", "Question 2: What does CSS stand for?", "Question 3: What is a directory?", "Question 4: What is HTML?", "Question 5: What is a repository?"]
+//grab neccessary items
+var startButton = document.querySelector(".start-button");
+var timerElement = document.querySelector(".timer-count");
 
-var answer1 = ["A tag with no closing tag", "An empty tag", "An array of strings", "An automated tag"]
-var answer2 = ["Cascade Style Ships", "Cascading Style Sheets", "Coconut Syrup Sucks", "Costco Size Sheets"]
-var answer3 = ["Directions to a computer store", "A location for storing files on a computer", "Being direct with your boss?", "Somebody who doesn't take directions"]
-var answer4 = ["Hot Tamales Made Late", "Hot Tuesday Morning Laughs", "Hypertext Markup Language", "He Torments My Life"]
-var answer5 = ["A central location to store data", "Used in medical settings", "A place to re-deposit money", "A place where computers are stored",]
+var timerCount = 50;
+var timer;
+//starts game when start button is clicked
+function startGame() {
+    //start time
+    startTimer();
+
+    //show the question container
+    document.querySelector(".questions-container").classList.remove("hide");
+
+    //hide the start elements
+    document.querySelector(".start-screen").classList.add("hide");
+
+    //show the first question
+    showQuestion();
+}
+
+var qIndex = 0;
+function showQuestion() {
+    //get the current question obj
+    var question = quizQuestions[qIndex];
+
+    //create the question string markup
+    var questionString =
+        `
+        <div class="question-main">
+            <div class="question-title">${question.question}</div>
+            <div class="choices-container">
+                <div class="answer-choices">${question.choices[0]}</div>
+                <div class="answer-choices">${question.choices[1]}</div>
+                <div class="answer-choices">${question.choices[2]}</div>
+                <div class="answer-choices">${question.choices[3]}</div>
+            </div
+        </div>
+    `;
+
+    //convert the string into html and add it the page
+    document.querySelector(".questions-container").innerHTML = questionString;
+
+    //question choice event listener
+    var arrayAnswerBtn = document.querySelectorAll(".answer-choices");
+    arrayAnswerBtn.forEach(function (choice) {
+        choice.addEventListener("click", handleAnswerClick);
+    });
+};
+
+var score = 0;
+function handleAnswerClick(event) {
+    //check fi the answer is right
+    if (quizQuestions[qIndex].answer === event.target.textContent) {
+        score++;
+        console.log("********",score);
+    } else {
+        timerCount -= 10;
+    };
+
+    //show the next question
+    qIndex++;
+    if (qIndex === quizQuestions.length) {
+        endGame();
+    } else {
+        showQuestion();
+    }
+}
+
+function startTimer() {
+    timer = setInterval(function () {
+        timerCount--;
+        timerElement.textContent = timerCount;
+        if (timerCount === 0) {
+            endGame()
+        }
+    }, 1000);
+};
+
+//it starts the game function on "click"
+startButton.addEventListener("click", startGame);
+
+function endGame() {
+    //show end screen
+    document.querySelector(".end-screen").classList.remove("hide");
+
+    //hide question container
+    document.querySelector(".questions-container").classList.add("hide");
+
+    //clear timer
+    clearInterval(timer);
+
+    //show score
+    document.querySelector(".score").textContent = score;
+}
+
+//handle sumit button click
+document.querySelector(".submit").addEventListener("click", function() {
+    //get user intitials
+    var userInitials = document.querySelector("#initials").value;
+
+    //get the history
+    var history = [];
+    if (localStorage.length > 0) {
+        history = JSON.parse(localStorage.getItem("history")); //JSON parse
+    };
+    console.log("*****history",history);
+            
+    //create history entry
+    var historyEntry = {
+        user: userInitials,
+        score: score
+    };
 
 
+    //push to history
+    history.push(historyEntry);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Event listener for the start button
-// add.eventListener
+    //set hsitroy to localsorage
+    localStorage.setItem("history", JSON.stringify(history));
+});
