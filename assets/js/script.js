@@ -59,11 +59,13 @@ function showQuestion() {
         <div class="question-main">
             <div class="question-title">${question.question}</div>
             <div class="choices-container">
-                <div class="answer-choices">${question.choices[0]}</div>
-                <div class="answer-choices">${question.choices[1]}</div>
-                <div class="answer-choices">${question.choices[2]}</div>
-                <div class="answer-choices">${question.choices[3]}</div>
-            </div
+                <ol>
+                <li><button class="answer-choices">${question.choices[0]}</button></li>
+                <li><button class="answer-choices">${question.choices[1]}</button></li>
+                <li><button class="answer-choices">${question.choices[2]}</button></li>
+                <li><button class="answer-choices">${question.choices[3]}</button></li>
+                </ol>
+                </div
         </div>
     `;
 
