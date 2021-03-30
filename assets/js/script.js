@@ -84,7 +84,7 @@ function handleAnswerClick(event) {
     //check if the answer is right
     if (quizQuestions[qIndex].answer === event.target.textContent) {
         score++;
-        console.log("********",score);
+       // console.log("********",score);
     } else {
         timerCount -= 10;
     };

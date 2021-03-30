@@ -41,7 +41,7 @@ a {
     text-align: left;
     color:cornflowerblue;
     margin-top: 150px;
-    margin-left: 500px;
+    margin-left: 600px;
     line-height: 1.5;
     
 }
@@ -68,16 +68,12 @@ a {
 }
 .end-screen {
     text-align: center;
-    margin-top: 150px;
-  
-    margin-left: 100px;
-    
-    align-items: center;
+    margin:auto;
+    margin-left: -400px;
+   
 }
-#scores1 {
-    text-align: left;
-    float: right;
-    color: 
-}
+#scores {
+    margin-left: -200px;
+} 
 
 

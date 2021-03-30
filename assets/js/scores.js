@@ -19,13 +19,9 @@ setTimeout(() => {
     document.querySelector("#highscores").innerHTML = scoreListHTML;
 },0);
 
-function showHighscores() {
-    var highScores = JSON.parse(window.localStorage.getItem(highscores)) || [];
-    highScores.sort(function(a, b) {
-        return b.score - a.score;
-});
 
-}
+
+
 function clearHighScores() {
     window.localStorage.removeItem("highscores");
 }
