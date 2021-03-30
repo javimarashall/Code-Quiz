@@ -20,10 +20,11 @@ setTimeout(() => {
 },0);
 
 
-
-
 function clearHighScores() {
-    window.localStorage.removeItem("highscores");
+    window.localStorage.clear("highscores");
+    var removeEl = document.getElementById("highscores");
+    removeEl.remove();
+
 }
 
 document.getElementById("clear").onclick = clearHighScores;
