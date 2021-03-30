@@ -81,7 +81,7 @@ function showQuestion() {
 
 var score = 0;
 function handleAnswerClick(event) {
-    //check fi the answer is right
+    //check if the answer is right
     if (quizQuestions[qIndex].answer === event.target.textContent) {
         score++;
         console.log("********",score);
