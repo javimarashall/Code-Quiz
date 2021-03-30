@@ -18,3 +18,10 @@ setTimeout(() => {
     
     document.querySelector("#highscores").innerHTML = scoreListHTML;
 },0);
+
+function clearHighScores() {
+    window.localStorage.removeItem("highscores");
+    window.location.reload();
+}
+
+document.getElementById("clear").onclick = clearHighScores;
