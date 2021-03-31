@@ -30,8 +30,9 @@ p {
 a {
     font-family:Arial, Helvetica, sans-serif;
     font-size: 20px;
-    padding: 10px;
+    padding: 15px;
     line-height: 1.5px;
+
   
 }
 .hide {
@@ -41,7 +42,7 @@ a {
     text-align: left;
     color:cornflowerblue;
     margin-top: 150px;
-    margin-left: 600px;
+    margin-left: 800px;
     line-height: 1.5;
     
 }
@@ -68,12 +69,13 @@ a {
 }
 .end-screen {
     text-align: center;
-    margin:auto;
-    margin-left: -400px;
+    margin-right: 400px;
+  
    
 }
 #scores {
     margin-left: -200px;
+    margin-top: 100px;
 } 
 
 
